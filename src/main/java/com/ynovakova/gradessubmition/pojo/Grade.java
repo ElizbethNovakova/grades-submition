@@ -1,5 +1,6 @@
-package com.ynovakova.gradessubmition;
+package com.ynovakova.gradessubmition.pojo;
 
+import com.ynovakova.gradessubmition.validation.Score;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;

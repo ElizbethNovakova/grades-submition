@@ -1,4 +1,4 @@
-package com.ynovakova.gradessubmition;
+package com.ynovakova.gradessubmition.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
