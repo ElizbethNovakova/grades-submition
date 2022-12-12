@@ -1,6 +1,6 @@
 package com.ynovakova.gradessubmition;
 
-import com.ynovakova.gradessubmition.pojo.Grade;
+import com.ynovakova.gradessubmition.entity.Grade;
 import com.ynovakova.gradessubmition.repository.GradeRepository;
 import com.ynovakova.gradessubmition.service.GradeService;
 import org.junit.Assert;

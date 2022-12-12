@@ -1,5 +1,4 @@
 package com.ynovakova.gradessubmition.repository;
 
-public class GradeRepository {
-
+public class StudentRepository {
 }
