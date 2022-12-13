@@ -1,34 +1,34 @@
 package com.ynovakova.gradessubmition.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity
+@Table(name = "students")
+@Getter
+@Setter
+@AllArgsConstructor
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class Student {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @NonNull
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @NonNull
+    @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Grade> grades;
 }

@@ -1,41 +1,37 @@
 package com.ynovakova.gradessubmition.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "course")
 public class Course {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @NonNull
+    @Column(name = "subject", nullable = false)
     private String subject;
+
+    @NonNull
+    @Column(name = "code", nullable = false, unique = true)
     private String code;
+
+    @NonNull
+    @Column(name = "description", nullable = false)
     private String description;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Grade> grades;
 }
