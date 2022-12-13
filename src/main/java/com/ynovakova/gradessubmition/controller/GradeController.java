@@ -2,8 +2,8 @@ package com.ynovakova.gradessubmition.controller;
 
 import com.ynovakova.gradessubmition.entity.Grade;
 import com.ynovakova.gradessubmition.service.GradeService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class GradeController {
     }
 
     @PostMapping("/student/{studentId}/course/{courseId}")
-    public ResponseEntity<Grade> saveGrade(@RequestBody Grade grade,
+    public ResponseEntity<Grade> saveGrade(@Valid @RequestBody Grade grade,
                                            @PathVariable Long studentId,
                                            @PathVariable Long courseId){
         return new ResponseEntity<>(gradeService.saveGrade(grade, studentId, courseId),
@@ -31,7 +31,7 @@ public class GradeController {
     }
 
     @PutMapping("/student/{studentId}/course/{courseId}")
-    public ResponseEntity<Grade> updateGrade(@RequestBody Grade grade,
+    public ResponseEntity<Grade> updateGrade(@Valid @RequestBody Grade grade,
                                              @PathVariable Long studentId,
                                              @PathVariable Long courseId){
         return new ResponseEntity<>(gradeService.updateGrade(grade.getScore(), studentId, courseId),

@@ -1,5 +1,6 @@
 package com.ynovakova.gradessubmition.entity;
 
+import com.ynovakova.gradessubmition.validation.Score;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +21,9 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "score", nullable = false)
+    @Score
     private String score;
 
     @ManyToOne(optional = false)

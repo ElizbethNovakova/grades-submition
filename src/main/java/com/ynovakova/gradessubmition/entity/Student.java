@@ -2,6 +2,8 @@ package com.ynovakova.gradessubmition.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -22,10 +24,12 @@ public class Student {
 
     @NonNull
     @Column(name = "name", nullable = false)
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
     @NonNull
     @Column(name = "birth_date", nullable = false)
+    @Past(message = "The birth date must be in the past")
     private LocalDate birthDate;
 
     @JsonIgnore
