@@ -4,6 +4,7 @@ import com.ynovakova.gradessubmition.entity.Course;
 import com.ynovakova.gradessubmition.entity.Grade;
 import com.ynovakova.gradessubmition.entity.Student;
 import com.ynovakova.gradessubmition.exceptions.GradeNotFoundException;
+import com.ynovakova.gradessubmition.exceptions.StudentNotEnrolledException;
 import com.ynovakova.gradessubmition.repository.CourseRepository;
 import com.ynovakova.gradessubmition.repository.GradeRepository;
 import com.ynovakova.gradessubmition.repository.StudentRepository;
@@ -32,6 +33,9 @@ public class GradeServiceImpl implements GradeService {
     public Grade saveGrade(Grade grade, Long studentId, Long courseId) {
         Student student = StudentServiceImpl.unwrapStudent(studentRepository.findById(studentId), studentId);
         Course course = CourseServiceImpl.unwrapCourse(courseRepository.findById(courseId), courseId);
+
+        if(!student.getCourses().contains(course)) throw new StudentNotEnrolledException(studentId, courseId);
+
         grade.setStudent(student);
         grade.setCourse(course);
         return gradeRepository.save(grade);

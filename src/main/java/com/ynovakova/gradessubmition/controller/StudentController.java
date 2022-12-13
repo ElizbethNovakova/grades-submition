@@ -1,5 +1,6 @@
 package com.ynovakova.gradessubmition.controller;
 
+import com.ynovakova.gradessubmition.entity.Course;
 import com.ynovakova.gradessubmition.entity.Student;
 import com.ynovakova.gradessubmition.service.StudentService;
 import jakarta.validation.Valid;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/student")
@@ -38,5 +40,10 @@ public class StudentController {
     @GetMapping("/all")
     public ResponseEntity<List<Student>> getStudents(){
         return new ResponseEntity<>(studentService.getStudents(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{studentId}/courses")
+    public ResponseEntity<Set<Course>> getEnrolledCourses(@PathVariable Long studentId){
+        return new ResponseEntity<>(studentService.getEnrolledCourses(studentId), HttpStatus.OK);
     }
 }

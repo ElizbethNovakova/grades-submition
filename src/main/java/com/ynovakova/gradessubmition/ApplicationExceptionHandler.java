@@ -1,9 +1,6 @@
 package com.ynovakova.gradessubmition;
 
-import com.ynovakova.gradessubmition.exceptions.CourseNotFoundException;
-import com.ynovakova.gradessubmition.exceptions.ErrorResponse;
-import com.ynovakova.gradessubmition.exceptions.GradeNotFoundException;
-import com.ynovakova.gradessubmition.exceptions.StudentNotFoundException;
+import com.ynovakova.gradessubmition.exceptions.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
@@ -29,7 +26,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({CourseNotFoundException.class, GradeNotFoundException.class, StudentNotFoundException.class})
+    @ExceptionHandler({CourseNotFoundException.class, GradeNotFoundException.class, StudentNotFoundException.class, StudentNotEnrolledException.class})
     public ResponseEntity<Object> handleResourceNotFoundException(RuntimeException ex){
         ErrorResponse errors = new ErrorResponse(Arrays.asList(ex.getMessage()));
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
