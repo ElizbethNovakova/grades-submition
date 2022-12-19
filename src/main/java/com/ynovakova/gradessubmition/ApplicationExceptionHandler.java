@@ -26,7 +26,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({CourseNotFoundException.class, GradeNotFoundException.class, StudentNotFoundException.class, StudentNotEnrolledException.class, EntityNotFoundException.class})
+    @ExceptionHandler({GradeNotFoundException.class, StudentNotEnrolledException.class, EntityNotFoundException.class})
     public ResponseEntity<Object> handleResourceNotFoundException(RuntimeException ex){
         ErrorResponse errors = new ErrorResponse(Arrays.asList(ex.getMessage()));
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);

@@ -2,7 +2,8 @@ package com.ynovakova.gradessubmition.service;
 
 import com.ynovakova.gradessubmition.entity.Course;
 import com.ynovakova.gradessubmition.entity.Student;
-import com.ynovakova.gradessubmition.exceptions.StudentNotFoundException;
+import com.ynovakova.gradessubmition.entity.User;
+import com.ynovakova.gradessubmition.exceptions.EntityNotFoundException;
 import com.ynovakova.gradessubmition.repository.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,6 @@ public class StudentServiceImpl implements StudentService {
 
     static Student unwrapStudent(Optional<Student> entity, Long id) {
         if (entity.isPresent()) return entity.get();
-        else throw new StudentNotFoundException(id);
+        else throw new EntityNotFoundException(id, Student.class);
     }
 }

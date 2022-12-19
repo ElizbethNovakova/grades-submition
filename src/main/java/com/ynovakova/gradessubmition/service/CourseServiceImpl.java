@@ -2,7 +2,7 @@ package com.ynovakova.gradessubmition.service;
 
 import com.ynovakova.gradessubmition.entity.Course;
 import com.ynovakova.gradessubmition.entity.Student;
-import com.ynovakova.gradessubmition.exceptions.CourseNotFoundException;
+import com.ynovakova.gradessubmition.exceptions.EntityNotFoundException;
 import com.ynovakova.gradessubmition.repository.CourseRepository;
 import com.ynovakova.gradessubmition.repository.StudentRepository;
 import lombok.AllArgsConstructor;
@@ -57,6 +57,6 @@ public class CourseServiceImpl implements CourseService {
 
     static Course unwrapCourse(Optional<Course> entity, Long id) {
         if (entity.isPresent()) return entity.get();
-        else throw new CourseNotFoundException(id);
+        else throw new EntityNotFoundException(id, Course.class);
     }
 }
