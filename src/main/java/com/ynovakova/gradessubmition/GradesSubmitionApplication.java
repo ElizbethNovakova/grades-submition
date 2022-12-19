@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -21,6 +23,11 @@ public class GradesSubmitionApplication implements CommandLineRunner {
 	CourseRepository courseRepository;
 	@Autowired
 	GradeRepository gradeRepository;
+
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(GradesSubmitionApplication.class, args);
