@@ -1,5 +1,6 @@
 package com.ynovakova.gradessubmition.security.filter;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.ynovakova.gradessubmition.exceptions.EntityNotFoundException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,6 +17,11 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
         } catch (EntityNotFoundException e) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             response.getWriter().write("Username doesn't exist");
+            response.getWriter().flush();
+        }
+        catch(JWTVerificationException e){
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getWriter().write("JWT not valid");
             response.getWriter().flush();
         }
         catch (RuntimeException e) {

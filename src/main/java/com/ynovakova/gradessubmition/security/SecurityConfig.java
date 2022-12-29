@@ -2,6 +2,7 @@ package com.ynovakova.gradessubmition.security;
 
 import com.ynovakova.gradessubmition.security.filter.AuthenticationFilter;
 import com.ynovakova.gradessubmition.security.filter.ExceptionHandlerFilter;
+import com.ynovakova.gradessubmition.security.filter.JWTAuthorizationFilter;
 import com.ynovakova.gradessubmition.security.manager.CustomAuthenticationManager;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +36,7 @@ public class SecurityConfig {
                 .and()
                 .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
                 .addFilter(authenticationFilter)
+                .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
